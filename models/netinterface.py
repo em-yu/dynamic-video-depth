@@ -352,6 +352,12 @@ class NetInterface(object):
             _vali(initial_epoch - 1)
         for epoch in range(initial_epoch, initial_epoch + epochs):
             _train(epoch)
+
+            # Memory
+            print("torch.cuda.memory_allocated: %fGB"%(torch.cuda.memory_allocated(0)/1024/1024/1024))
+            print("torch.cuda.memory_reserved: %fGB"%(torch.cuda.memory_reserved(0)/1024/1024/1024))
+            print("torch.cuda.max_memory_reserved: %fGB"%(torch.cuda.max_memory_reserved(0)/1024/1024/1024))
+
             if train_epoch_callback is not None:
                 train_epoch_callback(epoch)
             if dataloader_vali is not None:
